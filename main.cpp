@@ -14,43 +14,67 @@ using std::cout;
 using std::cin;
 using std::string;
 
+class Main {
  public:
     /** The top left index. */
-    static final int ZERO = 0;
+    const int ZERO = 0;
     /** The top middle index. */
-    static final int ONE = 1;
+    const int ONE = 1;
     /** The top right index. */
-    static final int TWO = 2;
+    const int TWO = 2;
     /** The middle left index. */
-    static final int THREE = 3;
+    const int THREE = 3;
     /** The center index. */
-    static final int FOUR = 4;
+    const int FOUR = 4;
     /** The middle right index. */
-    static final int FIVE = 5;
+    const int FIVE = 5;
     /** The lower left index. */
-    public static final int SIX = 6;
+    const int SIX = 6;
     /** The lower center index. */
-    static final int SEVEN = 7;
+    const int SEVEN = 7;
     /** The lower right index. */
-    static final int EIGHT = 8;
+    const int EIGHT = 8;
     /** The maximum number for magicNumbers. */
-    static final int NINE = 9;
+    const int NINE = 9;
     /** The maximum number for magicNumbers. */
-    static final int MAGICNUM = 15;
+    const int MAGICNUM = 15;
+    /** 
+     * array size needs to eb constant to print out using proper code format. 
+     */
+    static constexpr int LENGTH_OF_ARRAY = 9;
 
     // Process numbers.
  private:
     /**
      * Counts numebr of permutations of array.
      */
-    static int numberOfProcess = 0;
+    int numberOfProcess = 0;
 
     /**
      * counts number of magic squares generated.
      */
-    static int numberOfMagicSquares = 0;
+    int numberOfMagicSquares = 0;
 
  public:
+    /**
+     * Get number of process.
+     *
+     * @return numberOfProcess
+     */
+    int getNumberOfProcess() {
+        return numberOfProcess;
+    }
+
+    /**
+     * Get number of magic squares.
+     *
+     * @return numberOfMagicSquares
+     */
+    int getNumberOfMagicSquares() {
+        return numberOfMagicSquares;
+    }
+
+
     /**
      * Recursivley checks every single magic square possible and
      * prints the ones that are valid.
@@ -58,7 +82,7 @@ using std::string;
      * @param currentSquare
      * @param lengthOfArray
      */
-    static void genSquare2(int[] currentSquare, int lengthOfArray) {
+    void genSquare2(int currentSquare[], int lengthOfArray) {
         // generate the magic sqaure
         if (lengthOfArray == 1) {
             numberOfProcess += 1;
@@ -77,7 +101,7 @@ using std::string;
      * @param lengthOfArray
      * @param index
      */
-    static void genSquare(int[] currentSquare,
+    void genSquare(int currentSquare[],
                                  int lengthOfArray,
                                  int index) {
         int lastIndexValue;
@@ -112,8 +136,9 @@ using std::string;
      * Checks if array satfies the condition to make it a magic square.
      *
      * @param preSquare
+     * @param lengthOfArry
      */
-    static void isMagic(int[] preSquare) {
+    void isMagic(int preSquare[]) {
         // returns true or false for whether or not array is a magic square
         // this assumes there are no repeats, but that check could be added!
         int row1 = preSquare[ZERO] + preSquare[ONE] + preSquare[TWO];
@@ -151,37 +176,49 @@ using std::string;
      * Prints out ecah valid magic square.
      *
      * @param outputSquare
+     * @param lengthOfArray
      */
-    static void printMagicSquare(int[] outputSquare) {
+    void printMagicSquare(int outputSquare[]) {
+        // creates return array using original to output magic square
+        static int returnArray[LENGTH_OF_ARRAY];
+
+        for (int index = 0; index <= LENGTH_OF_ARRAY; index++) {
+           returnArray[index] = outputSquare[index];
+        }
+
         // prints inputted array in a magic square format
-        cout << "\n*****";
-        for (int count = 0; count < outputSquare.length; count++) {
+        cout << "\n*****\n";
+        for (int count = 0; count < LENGTH_OF_ARRAY; count++) {
             if (count == THREE || count == SIX) {
                 cout << "\n";
-                cout << outputSquare[count] << " ";
+                cout << returnArray[count] << " ";
             } else {
-                cout << outputSquare[count] << " ";
+                cout << returnArray[count] << " ";
             }
         }
         cout << "\n*****";
     }
+};
 
-    /**
-     * Runs main.
-     *
-     * @param args
-     */
-    main() {
-        // main stub, get user input here
-        int[] magicSquare = {ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT,
-                NINE};
-        //int[] duplicateMagicSquare = {}
-        //boolean magicSquareBool;
-        cout << "\n\n";
-        cout << "\nAll Possible Magic Squares (3x3):\n";
-        genSquare2(magicSquare, magicSquare.length);
-        cout << "\nNumber of processes: " << numberOfProcess;
-        cout << "\nNumber of Magic Squares: " << numberOfMagicSquares;
-        cout << "\n\nDone.";
-    }
+/**
+ * Runs main.
+ *
+ * @param args
+ */
+int main() {
+    // declares class for constants
+    Main main;
+    // main stub, get user input here
+    int magicSquare[] = {main.ONE, main.TWO, main.THREE, main.FOUR, main.FIVE,
+            main.SIX, main.SEVEN, main.EIGHT, main.NINE};
+
+    //int[] duplicateMagicSquare = {}
+    //boolean magicSquareBool;
+    cout << "\n\n";
+    cout << "\nAll Possible Magic Squares (3x3):\n";
+    main.genSquare2(magicSquare, main.LENGTH_OF_ARRAY);
+    cout << "\nNumber of processes: " << main.getNumberOfProcess();
+    cout << "\nNumber of Magic Squares: " << main.getNumberOfMagicSquares();
+    cout << "\n\nDone.";
 }
+
