@@ -1,4 +1,5 @@
 /*
+* Copyright (c) 2025 St. Mother Teresa HS All rights reserved.
 * This program prints out
 * the Magic Sqaures.
 *
@@ -211,9 +212,6 @@ int main() {
     // main stub, get user input here
     int magicSquare[] = {main.ONE, main.TWO, main.THREE, main.FOUR, main.FIVE,
             main.SIX, main.SEVEN, main.EIGHT, main.NINE};
-
-    //int[] duplicateMagicSquare = {}
-    //boolean magicSquareBool;
     cout << "\n\n";
     cout << "\nAll Possible Magic Squares (3x3):\n";
     main.genSquare2(magicSquare, main.LENGTH_OF_ARRAY);
