@@ -194,9 +194,7 @@ class Main {
             cout << "\n*****";
         }
 
-        for (int index = 0; index <= LENGTH_OF_ARRAY; index++) {
-           returnArray[index] = outputSquare[index];
-        }
+        returnArray[index] = outputSquare[index];
 
         // prints inputted array in a magic square format
         if (index % THREE == 0) {
