@@ -162,7 +162,7 @@ class Main {
                                     if (diag2 == MAGICNUM) {
                                         // updates magic square counter
                                         numberOfMagicSquares += 1;
-                                        printMagicSquare(preSquare);
+                                        printMagicSquare(preSquare, 0);
                                     }
                                 }
                             }
@@ -179,25 +179,34 @@ class Main {
      * @param outputSquare
      * @param lengthOfArray
      */
-    void printMagicSquare(int outputSquare[]) {
+    void printMagicSquare(int outputSquare[], int index) {
+        // base
+        if (index == LENGTH_OF_ARRAY) {
+            cout << "\n*****\n";
+            return;
+        }
+
         // creates return array using original to output magic square
         static int returnArray[LENGTH_OF_ARRAY];
+
+        // prints top of magic square once
+        if (index == ZERO) {
+            cout << "\n*****";
+        }
 
         for (int index = 0; index <= LENGTH_OF_ARRAY; index++) {
            returnArray[index] = outputSquare[index];
         }
 
         // prints inputted array in a magic square format
-        cout << "\n*****\n";
-        for (int count = 0; count < LENGTH_OF_ARRAY; count++) {
-            if (count == THREE || count == SIX) {
-                cout << "\n";
-                cout << returnArray[count] << " ";
-            } else {
-                cout << returnArray[count] << " ";
-            }
+        if (index % THREE == 0) {
+            cout << "\n";
+            cout << returnArray[index] << " ";
+        } else {
+            cout << returnArray[index] << " ";
         }
-        cout << "\n*****";
+
+        printMagicSquare(outputSquare, index + 1);
     }
 };
 
